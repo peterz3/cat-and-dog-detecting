@@ -42,6 +42,9 @@ image_ds = image_paths.map(load_and_preprocess_image)
 
 
 image_label_ds = tf.data.Dataset.zip((image_ds, label_ds))
+num = len(cat_labels) + len(dog_labels)
+ds = image_label_ds.shuffle(buffer_size=num)
+ds = ds.repeat()
+ds = ds.batch(BATCH_SIZE)
 
-print(image_label_ds)
 
